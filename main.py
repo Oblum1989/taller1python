@@ -1,6 +1,6 @@
 """
 ***********************************
-Autor: MANUEL GERARDO CAMPEROS
+Autor: Blum
 ***********************************
 funcion : salario_empleado
 
@@ -45,7 +45,7 @@ print(salario_empleado(salario4))
 
 """
 **********************************
-* Autor: MANUEL GERARDO CAMPEROS
+* Autor: Blum
 **********************************
 * Funcion: velocidad_media
 
@@ -105,7 +105,7 @@ print(velocidad_media(conductor4))
 
 """
 **********************************
-* Autor: MANUEL GERARDO CAMPEROS
+* Autor: Blum
 **********************************
 * Funcion: tienda_maria
 
@@ -247,3 +247,66 @@ print(tienda_maria(producto1))
 print(tienda_maria(producto2))
 print(tienda_maria(producto3))
 print(tienda_maria(producto4))
+
+
+
+"""
+**********************************
+* Autor: Blum
+**********************************
+* Funcion: copia_examen
+
+* Ejercicio 3: Detectando copia en los exámenes de programación.
+Uno de los profesores de programación de la Universidad de Pamplona está comenzando a perder su memoria.
+Hace algún tiempo, cuando comenzó a trabajar como docente, no únicamente conocía perfectamente todos los
+nombres y apellidos de sus estudiant
+* Realizar una función que reciba como parámetro en una lista, el cual contiene en cada una de sus posiciones los
+valores de:
+  * Un arreglo con las respuestas de cada uno de los exámenes a calificar.
+  * Un número entero k, que representa la memoria del profesor.
+
+-----------------------------------------------
+La función retorna una tupla de dos posiciones:
+  * El primero valor representa el número total de exámenes copiados.
+  * El segundo valor representa la cantidad de copias detectadas por el profesor considerando que al calificar
+un examen solo es capaz de recordar los k exámenes anteriores.
+Dos exámenes se consideran copiados si están representados por el mismo número.
+----------------------------------------------
+* Casos de prueba:
+  examenes  = [[1,2,1,2,1],1]      ==> (3,0)
+  examenes  = [[1,2,1,2,1],2]      ==> (3,3)
+  examenes  = [[1,2,3,1,2,1],2]    ==> (3,1)
+  examenes  = [[1,2,3,4,5,6,7],1]  ==> (0,0)
+  examenes  = [[1,1,1,1,1,1,1],2]  ==> (6,6)
+-------------------------------------------------
+"""
+
+def copia_examen(examenes):
+  lista_examenes = examenes[0]
+  memoria_profesor = examenes[1]
+  copias_encontradas_profesor = 0
+  copias_encontradas_total = 0
+  for i in range(0, len(lista_examenes)):
+    respuesta_examen = lista_examenes[i]
+    if (i-memoria_profesor) < 0:
+      i_profe = 0 
+    else:
+      i_profe = i-memoria_profesor
+
+    if respuesta_examen in lista_examenes[(i_profe):i]:
+      copias_encontradas_profesor += 1
+    if respuesta_examen in lista_examenes[:i]:
+      copias_encontradas_total += 1
+  return(copias_encontradas_total, copias_encontradas_profesor)
+
+examenes1  = [[1,2,1,2,1],1]    
+examenes2  = [[1,2,1,2,1],2]    
+examenes3  = [[1,2,3,1,2,1],2] 
+examenes4  = [[1,2,3,4,5,6,7],1]
+examenes5  = [[1,1,1,1,1,1,1],2]
+
+print(copia_examen(examenes1))
+print(copia_examen(examenes2))
+print(copia_examen(examenes3))
+print(copia_examen(examenes4))
+print(copia_examen(examenes5))
